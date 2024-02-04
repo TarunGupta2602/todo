@@ -1,0 +1,33 @@
+<!-- yourapp/templates/todo_list.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+</head>
+<body>
+
+  <h2>Todo List</h2>
+
+  {% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}! <a href="{% url 'logout' %}">Logout</a></p>
+  {% else %}
+    <p><a href="{% url 'login' %}">Login</a> or <a href="{% url 'register' %}">Register</a></p>
+  {% endif %}
+
+  <ul>
+    {% for todo in todos %}
+      <li>
+        {{ todo.Task }}
+        <a href="{% url 'delete_todo' todo.id %}">Delete</a>
+      </li>
+    {% endfor %}
+  </ul>
+
+  <a href="{% url 'create_todo' %}">Add Todo</a>
+
+</body>
+</html>
+
